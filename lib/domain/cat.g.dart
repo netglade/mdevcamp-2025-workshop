@@ -18,6 +18,8 @@ Cat _$CatFromJson(Map<String, dynamic> json) => Cat(
   originStory: json['origin_story'] as String,
   funFact: json['fun_fact'] as String,
   breed: CatBreed.fromJson(json['breed'] as Map<String, dynamic>),
+  isAdopted: json['is_adopted'] as bool? ?? false,
+  adoptedBy: json['adoptedBy'] as String?,
 );
 
 Map<String, dynamic> _$CatToJson(Cat instance) => <String, dynamic>{
@@ -32,4 +34,6 @@ Map<String, dynamic> _$CatToJson(Cat instance) => <String, dynamic>{
   'origin_story': instance.originStory,
   'fun_fact': instance.funFact,
   'breed': instance.breed,
+  'is_adopted': instance.isAdopted,
+  'adoptedBy': instance.adoptedBy,
 };

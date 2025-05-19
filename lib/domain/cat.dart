@@ -28,6 +28,11 @@ class Cat extends Equatable {
 
   final CatBreed breed;
 
+  @JsonKey(name: 'is_adopted', defaultValue: false)
+  final bool isAdopted;
+
+  final String? adoptedBy;
+
   const Cat({
     required this.id,
     required this.imageUrl,
@@ -40,11 +45,45 @@ class Cat extends Equatable {
     required this.originStory,
     required this.funFact,
     required this.breed,
+    this.isAdopted = false,
+    this.adoptedBy,
   });
 
   factory Cat.fromJson(Map<String, dynamic> json) => _$CatFromJson(json);
 
   Map<String, dynamic> toJson() => _$CatToJson(this);
+
+  Cat copyWith({
+    String? id,
+    String? imageUrl,
+    String? name,
+    String? breedId,
+    int? age,
+    String? favoriteFood,
+    String? afraidOfThing,
+    int? price,
+    String? originStory,
+    String? funFact,
+    CatBreed? breed,
+    bool? isAdopted,
+    String? adoptedBy,
+  }) {
+    return Cat(
+      id: id ?? this.id,
+      imageUrl: imageUrl ?? this.imageUrl,
+      name: name ?? this.name,
+      breedId: breedId ?? this.breedId,
+      age: age ?? this.age,
+      favoriteFood: favoriteFood ?? this.favoriteFood,
+      afraidOfThing: afraidOfThing ?? this.afraidOfThing,
+      price: price ?? this.price,
+      originStory: originStory ?? this.originStory,
+      funFact: funFact ?? this.funFact,
+      breed: breed ?? this.breed,
+      isAdopted: isAdopted ?? this.isAdopted,
+      adoptedBy: adoptedBy ?? this.adoptedBy,
+    );
+  }
 
   @override
   List<Object?> get props => [
@@ -59,5 +98,7 @@ class Cat extends Equatable {
     originStory,
     funFact,
     breed,
+    isAdopted,
+    adoptedBy,
   ];
 }

@@ -2,9 +2,9 @@ import 'package:get_it/get_it.dart';
 import 'package:mdevcamp_workshop/repositories/cats_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../domain/domain.dart';
+import '../domain/domain.dart';
 
-part 'cats.g.dart';
+part 'cats_list.g.dart';
 
 @Riverpod(keepAlive: true)
 class CatsList extends _$CatsList {

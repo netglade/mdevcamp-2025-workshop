@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mdevcamp_workshop/pages/home/providers/cats.dart';
+import 'package:mdevcamp_workshop/providers/cats_list.dart';
 import 'package:mdevcamp_workshop/pages/home/tabs/cats/widgets/cat_detail_card.dart';
 import 'package:mdevcamp_workshop/pages/home/tabs/cats/widgets/cat_tile.dart';
 

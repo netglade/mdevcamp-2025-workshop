@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:mdevcamp_workshop/pages/home/providers/home_page_bottom_nav_notifier.dart';
 import 'package:mdevcamp_workshop/pages/home/tabs/breeds/breeds_tab.dart';
 import 'package:mdevcamp_workshop/pages/home/tabs/cats/cats_tab.dart';
 
-class HomePage extends ConsumerWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final currentIndex = ref.watch(homePageBottomNavNotifierProvider);
+  State<HomePage> createState() => _HomePageState();
+}
 
+class _HomePageState extends State<HomePage> {
+  int currentIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: switch (currentIndex) {
@@ -44,7 +47,9 @@ class HomePage extends ConsumerWidget {
         currentIndex: currentIndex,
         onTap: (index) {
           if (index != currentIndex) {
-            ref.read(homePageBottomNavNotifierProvider.notifier).setIndex(index);
+            setState(() {
+              currentIndex = index;
+            });
           }
         },
       ),

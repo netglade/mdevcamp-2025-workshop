@@ -5,7 +5,7 @@ import 'package:mdevcamp_workshop/pages/home/tabs/breeds/widgets/breed_detail_ca
 import 'package:mdevcamp_workshop/pages/home/tabs/breeds/widgets/breed_tile.dart';
 
 import '../../../../domain/domain.dart';
-import '../../providers/cat_breeds.dart';
+import '../../../../providers/cat_breeds.dart';
 
 class BreedsTab extends ConsumerWidget {
   const BreedsTab({super.key});

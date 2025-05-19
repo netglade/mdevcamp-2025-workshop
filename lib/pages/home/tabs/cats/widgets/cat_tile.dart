@@ -75,10 +75,15 @@ class CatTile extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Price(cat: cat),
-                    Age(cat: cat),
-                    FavoriteFood(cat: cat),
-                    AfraidOf(cat: cat),
+
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: Column(
+                        spacing: 4,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [Price(cat: cat), Age(cat: cat), FavoriteFood(cat: cat), AfraidOf(cat: cat)],
+                      ),
+                    ),
                   ],
                 ),
               ),

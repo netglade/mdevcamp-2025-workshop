@@ -5,8 +5,9 @@ class CatFilter extends Equatable {
   final String? breedId;
   final String? nameQuery;
   final int? ageLimit;
+  final bool isAdopted;
 
-  const CatFilter({this.breedId, this.nameQuery, this.ageLimit});
+  const CatFilter({this.breedId, this.nameQuery, this.ageLimit, this.isAdopted = false});
 
   @override
   List<Object?> get props => [breedId, nameQuery, ageLimit];
