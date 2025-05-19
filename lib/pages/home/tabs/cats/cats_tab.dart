@@ -12,24 +12,24 @@ class CastsTab extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final catsList = ref.watch(catsListProvider);
+    final catsListValue = ref.watch(catsListProvider);
 
     return Padding(
       padding: const EdgeInsets.all(16),
-      child: switch (catsList) {
+      child: switch (catsListValue) {
         AsyncError() => Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('Error loading breeds - ${catsList.error}'),
-                Text(catsList.stackTrace.toString().substring(30)),
+                Text('Error loading breeds - ${catsListValue.error}'),
+                Text(catsListValue.stackTrace.toString().substring(30)),
                 const SizedBox(height: 16),
                 ElevatedButton(
                     onPressed: () => ref.read(catsListProvider.notifier).refresh(), child: const Text('Retry')),
               ],
             ),
           ),
-        AsyncData(:final value) => _CatsList(cats: value),
+        AsyncData(:final value) => _CatsList(cats: value.where((cat) => !cat.isAdopted).toList()),
         _ => const Center(child: CircularProgressIndicator()),
       },
     );

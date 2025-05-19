@@ -1,4 +1,4 @@
-import 'package:mdevcamp_workshop/providers/cats_adopted_list.dart';
+import 'package:mdevcamp_workshop/providers/cats_list.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../domain/domain.dart';
@@ -21,7 +21,7 @@ class Basket extends _$Basket {
   }
 
   void confirmBuy() {
-    final adoptedNotifier = ref.read(catsAdoptedListProvider.notifier);
+    final adoptedNotifier = ref.read(catsListProvider.notifier);
     for (final cat in state) {
       adoptedNotifier.adoptCat(
         catId: cat.id,

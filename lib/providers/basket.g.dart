@@ -6,7 +6,7 @@ part of 'basket.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$basketHash() => r'c3be2a7e3300348bef35db26a77d3089e5e23329';
+String _$basketHash() => r'c564e9e9530b1271aa6e19f01116ddc12f37df5f';
 
 /// See also [Basket].
 @ProviderFor(Basket)
