@@ -2,10 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../../../../../domain/domain.dart';
+import '../../domain/domain.dart';
 
-class Age extends StatelessWidget {
-  const Age({super.key, required this.cat});
+class FavoriteFood extends StatelessWidget {
+  const FavoriteFood({super.key, required this.cat});
 
   final Cat cat;
 
@@ -17,9 +17,13 @@ class Age extends StatelessWidget {
         children: [
           WidgetSpan(
             alignment: PlaceholderAlignment.middle,
-            child: Padding(padding: const EdgeInsets.only(right: 8.0), child: FaIcon(FontAwesomeIcons.heart, size: 16)),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: FaIcon(FontAwesomeIcons.utensils, size: 16),
+            ),
           ),
-          TextSpan(text: '${cat.age} years'),
+          TextSpan(text: 'Favorite food: ', style: TextStyle(color: Colors.blueGrey)),
+          TextSpan(text: cat.favoriteFood),
         ],
       ),
     );

@@ -25,12 +25,9 @@ class Cat extends Equatable {
   final String originStory;
   @JsonKey(name: 'fun_fact')
   final String funFact;
-
   final CatBreed breed;
-
   @JsonKey(name: 'is_adopted', defaultValue: false)
   final bool isAdopted;
-
   final String? adoptedBy;
 
   const Cat({
@@ -86,19 +83,5 @@ class Cat extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-    id,
-    imageUrl,
-    name,
-    breedId,
-    age,
-    favoriteFood,
-    afraidOfThing,
-    price,
-    originStory,
-    funFact,
-    breed,
-    isAdopted,
-    adoptedBy,
-  ];
+  List<Object?> get props => [id];
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mdevcamp_workshop/pages/home/tabs/adopted/adopted_cats_tab.dart';
 import 'package:mdevcamp_workshop/pages/home/tabs/breeds/breeds_tab.dart';
 import 'package:mdevcamp_workshop/pages/home/tabs/cats/cats_tab.dart';
 
@@ -24,6 +25,7 @@ class _HomePageState extends State<HomePage> {
           _ => const Center(child: Text('Unknown')),
         },
         actions: [
+          // TODO(introduction): Add badge with number of items in basket.
           IconButton(
             icon: const FaIcon(FontAwesomeIcons.basketShopping),
             onPressed: () {
@@ -35,7 +37,7 @@ class _HomePageState extends State<HomePage> {
       body: switch (currentIndex) {
         0 => CastsTab(),
         1 => BreedsTab(),
-        2 => const Center(child: Text('Adopted')),
+        2 => AdoptedCatsTab(),
         _ => const Center(child: Text('Unknown')),
       },
       bottomNavigationBar: BottomNavigationBar(

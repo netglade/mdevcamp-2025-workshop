@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:mdevcamp_workshop/repositories/cats_repository.dart';
+import 'package:netglade_utils/netglade_utils.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../domain/domain.dart';
@@ -14,21 +15,43 @@ class CatsList extends _$CatsList {
 
   @override
   Future<List<Cat>> build() async {
-    print('CatsList build');
-
     final cats = await _catsRepository.getCats();
 
-    return cats;
+    if (cats.isSuccess) {
+      return cats.asSuccess;
+    }
+
+    throw cats.asError.exception;
   }
 
-  Future<void> load() async {
-    try {
-      state = AsyncLoading();
-      final cats = await _catsRepository.getCats();
+  Future<void> refresh() async {
+    state = AsyncLoading();
+    final cats = await _catsRepository.getCats();
 
-      state = AsyncData(cats);
-    } catch (e, s) {
-      state = AsyncError(e, s);
+    if (cats.isError) {
+      state = AsyncError(cats.asError.exception, cats.asError.stackTrace ?? StackTrace.current);
+    } else {
+      state = AsyncData(cats.asSuccess);
     }
+  }
+
+  Future<void> adoptCat({required String catId, required String userId}) async {
+    state = AsyncLoading();
+
+    final result = await _catsRepository.adoptCat(catId: catId, userId: userId);
+
+    if (result.isError) {
+      state = AsyncError(result.asError.exception, result.asError.stackTrace ?? StackTrace.current);
+    }
+
+    final cats = state.value ?? [];
+    final updatedCats = cats.map((cat) {
+      if (cat.id == result.asSuccess.id) {
+        return result.asSuccess;
+      }
+      return cat;
+    }).toList();
+
+    state = AsyncData(updatedCats);
   }
 }

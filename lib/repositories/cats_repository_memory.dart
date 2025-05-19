@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:mdevcamp_workshop/repositories/cats_repository.dart';
+import 'package:netglade_utils/netglade_utils.dart';
 
 import '../domain/domain.dart';
 
@@ -35,29 +36,56 @@ class CatsRepositoryMemory implements CatsRepository {
   }
 
   @override
-  Future<List<Cat>> getCats({CatFilter? filter}) async {
-    await _init();
+  Future<Result<Cat, RepositoryError>> adoptCat({required String catId, required String userId}) {
+    try {
+      final catIndex = _cats.indexWhere((cat) => cat.id == catId);
 
-    return _cats.where((cat) => filter?.apply(cat: cat) ?? true).toList();
+      if (catIndex == -1) {
+        return Future.value(Result.error(RepositoryError(exception: 'Cat not found')));
+      }
+
+      final updatedCat = _cats[catIndex].copyWith(isAdopted: true);
+      _cats[catIndex] = updatedCat;
+
+      return Future.value(Result.success(updatedCat));
+    } catch (e, s) {
+      return Future.value(Result.error(RepositoryError(exception: e, stackTrace: s)));
+    }
   }
 
   @override
-  Stream<List<Cat>> getCatsStream({CatFilter? filter}) async* {
+  Future<Result<List<CatBreed>, RepositoryError>> getBreeds() async {
     await _init();
 
-    yield* Stream.value(_cats.where((cat) => filter?.apply(cat: cat) ?? true).toList());
+    try {
+      return Result.success(_breeds);
+    } catch (e, s) {
+      return Result.error(RepositoryError(exception: e, stackTrace: s));
+    }
   }
 
   @override
-  Future<List<CatBreed>> getBreeds() async {
+  Stream<Result<List<CatBreed>, RepositoryError>> getBreedsStream() async* {
     await _init();
-    return _breeds;
+
+    yield Result.success(_breeds);
   }
 
   @override
-  Stream<List<CatBreed>> getBreedsStream() async* {
+  Future<Result<List<Cat>, RepositoryError>> getCats({CatFilter? filter}) async {
     await _init();
 
-    yield* Stream.value(_breeds);
+    try {
+      return Result.success(_cats.where((cat) => filter?.apply(cat: cat) ?? true).toList());
+    } catch (e, s) {
+      return Result.error(RepositoryError(exception: e, stackTrace: s));
+    }
+  }
+
+  @override
+  Stream<Result<List<Cat>, RepositoryError>> getCatsStream({CatFilter? filter}) async* {
+    await _init();
+
+    yield Result.success(_cats.where((cat) => filter?.apply(cat: cat) ?? true).toList());
   }
 }

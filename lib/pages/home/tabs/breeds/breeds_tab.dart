@@ -17,16 +17,17 @@ class BreedsTab extends ConsumerWidget {
       padding: const EdgeInsets.all(16),
       child: switch (breeds) {
         AsyncError() => Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('Error loading breeds - ${breeds.error}'),
-              Text(breeds.stackTrace.toString().substring(30)),
-              const SizedBox(height: 16),
-              ElevatedButton(onPressed: () => ref.read(catBreedsProvider.notifier).load(), child: const Text('Retry')),
-            ],
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('Error loading breeds - ${breeds.error}'),
+                Text(breeds.stackTrace.toString().substring(30)),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                    onPressed: () => ref.read(catBreedsProvider.notifier).refresh(), child: const Text('Retry')),
+              ],
+            ),
           ),
-        ),
         AsyncData(:final value) => _CatBreedsList(breeds: value),
         _ => const Center(child: CircularProgressIndicator()),
       },

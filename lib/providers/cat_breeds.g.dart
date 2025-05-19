@@ -6,21 +6,19 @@ part of 'cat_breeds.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$catBreedsHash() => r'120dd184fcf19d0ac1d3fc7339349c40b51976e9';
+String _$catBreedsHash() => r'3f68754e2fc62e310dc62849aa9d4789c6ec5fa9';
 
 /// See also [CatBreeds].
 @ProviderFor(CatBreeds)
 final catBreedsProvider =
     AsyncNotifierProvider<CatBreeds, List<CatBreed>>.internal(
-      CatBreeds.new,
-      name: r'catBreedsProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$catBreedsHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
+  CatBreeds.new,
+  name: r'catBreedsProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$catBreedsHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
 
 typedef _$CatBreeds = AsyncNotifier<List<CatBreed>>;
 // ignore_for_file: type=lint
