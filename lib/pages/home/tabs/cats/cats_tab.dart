@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mdevcamp_workshop/domain/domain.dart';
 import 'package:mdevcamp_workshop/providers/basket.dart';
-import 'package:mdevcamp_workshop/providers/cats_filtered_list.dart';
+import 'package:mdevcamp_workshop/providers/cats_filter.dart';
 import 'package:mdevcamp_workshop/providers/cats_list.dart';
 import 'package:mdevcamp_workshop/shared/widgets/cat_detail_card.dart';
 import 'package:mdevcamp_workshop/shared/widgets/cat_tile.dart';
@@ -12,7 +12,8 @@ class CastsTab extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final catsListValue = ref.watch(catsFilteredListProvider);
+    final catsListValue = ref.watch(catsListProvider);
+    final filter = ref.watch(catsFilterProvider);
 
     return Padding(
       padding: const EdgeInsets.all(16),
@@ -31,7 +32,8 @@ class CastsTab extends ConsumerWidget {
               ],
             ),
           ),
-        AsyncData(:final value) => _CatsList(cats: value.cats.where((cat) => !cat.isAdopted).toList()),
+        AsyncData(:final value) =>
+          _CatsList(cats: value.where((cat) => !cat.isAdopted && (filter?.apply(cat: cat) ?? true)).toList()),
         _ => const Center(child: CircularProgressIndicator()),
       },
     );

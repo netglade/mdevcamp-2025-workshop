@@ -3,24 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mdevcamp_workshop/domain/domain.dart';
 import 'package:mdevcamp_workshop/pages/home/tabs/cats/breeds_filter_modal.dart';
-import 'package:mdevcamp_workshop/providers/cats_filtered_list.dart';
+import 'package:mdevcamp_workshop/providers/cats_filter.dart';
 
 class FilterCatsButton extends ConsumerWidget {
   const FilterCatsButton({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final filteredCats = ref.watch(catsFilteredListProvider);
-
-    if (filteredCats.isLoading) return const SizedBox();
-
-    final value = filteredCats.value;
-
-    if (value == null) {
-      return const SizedBox();
-    }
-
-    final filter = value.filter;
+    final filter = ref.watch(catsFilterProvider);
     final selectedBreeds = filter?.breeds ?? {};
 
     return Stack(
@@ -33,7 +23,7 @@ class FilterCatsButton extends ConsumerWidget {
               builder: (context) => BreedsFilterModal(
                 selectedBreeds: selectedBreeds,
                 onClearFilter: () async {
-                  await ref.read(catsFilteredListProvider.notifier).clearFilter();
+                  ref.read(catsFilterProvider.notifier).clearFilter();
 
                   if (context.mounted) Navigator.pop(context);
                 },
@@ -41,7 +31,7 @@ class FilterCatsButton extends ConsumerWidget {
             );
 
             if (result != null && context.mounted) {
-              await ref.read(catsFilteredListProvider.notifier).setFilter(
+              ref.read(catsFilterProvider.notifier).setFilter(
                     CatFilter(
                       breeds: result,
                     ),
@@ -49,7 +39,7 @@ class FilterCatsButton extends ConsumerWidget {
             }
           },
         ),
-        if (value.hasFilter)
+        if (filter != null)
           Positioned(
             right: 5,
             top: 8,
