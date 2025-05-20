@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mdevcamp_workshop/domain/domain.dart';
-import 'package:mdevcamp_workshop/providers/cats_adopted_list.dart';
 import 'package:mdevcamp_workshop/providers/cats_list.dart';
 import 'package:mdevcamp_workshop/shared/widgets/cat_detail_card.dart';
 import 'package:mdevcamp_workshop/shared/widgets/cat_tile.dart';
@@ -12,7 +11,7 @@ class AdoptedCatsTab extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final catsList = ref.watch(catsAdoptedListProvider);
+    final catsList = ref.watch(catsListProvider);
 
     return Padding(
       padding: const EdgeInsets.all(16),
@@ -31,7 +30,7 @@ class AdoptedCatsTab extends ConsumerWidget {
               ],
             ),
           ),
-        AsyncData(:final value) => _CatsList(cats: value),
+        AsyncData(:final value) => _CatsList(cats: value.where((cat) => cat.isAdopted).toList()),
         _ => const Center(child: CircularProgressIndicator()),
       },
     );
