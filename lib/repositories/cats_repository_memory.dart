@@ -15,6 +15,7 @@ class CatsRepositoryMemory implements CatsRepository {
     if (_isLoaded) {
       return;
     }
+    _isLoaded = true;
 
     final catsJson = await rootBundle.loadString('assets/cats.json');
     final breedsJson = await rootBundle.loadString('assets/breeds.json');
@@ -28,8 +29,6 @@ class CatsRepositoryMemory implements CatsRepository {
     _breeds = breeds.map((breed) {
       return CatBreed.fromJson(breed as Map<String, dynamic>);
     }).toList();
-
-    _isLoaded = true;
   }
 
   @override
