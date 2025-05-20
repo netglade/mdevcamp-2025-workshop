@@ -1,0 +1,18 @@
+include: package:netglade_analysis/lints.yaml
+
+analyzer:
+  plugins:
+    - custom_lint
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - test/.test_coverage.dart
+    - lib/generated_plugin_registrant.dart
+    - bin/generate_breeds.dart
+    - bin/import_cats.dart
+
+linter:
+  # producing the lint.
+  rules:
+    avoid_print: false
+    # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
