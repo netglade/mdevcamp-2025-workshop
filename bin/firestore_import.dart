@@ -12,7 +12,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
   // Initialize Firebase using generated options
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
+  await Firebase.initializeApp(name: 'data-import', options: DefaultFirebaseOptions.android);
   final firestore = FirebaseFirestore.instance;
 
   // Import breeds
