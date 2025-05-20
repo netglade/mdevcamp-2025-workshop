@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mdevcamp_workshop/domain/domain.dart';
@@ -30,7 +31,7 @@ class AdoptedCatsTab extends ConsumerWidget {
               ],
             ),
           ),
-        AsyncData(:final value) => _CatsList(cats: value.where((cat) => cat.isAdopted).toList()),
+        AsyncData(:final value) => _CatsList(cats: catsList.value),
         _ => const Center(child: CircularProgressIndicator()),
       },
     );
@@ -44,7 +45,28 @@ class _CatsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (cats.isEmpty) {
+    final user = FirebaseAuth.instance.currentUser;
+    final isLoggedIn = user != null;
+
+    final adoptedCats = isLoggedIn ? cats.where((cat) => cat.adoptedBy == user.uid).toList() : <Cat>[];
+
+    if (!isLoggedIn) {
+      return Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          spacing: 16,
+          children: [
+            Text(
+              'Please log in to see your adopted cats',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            CachedNetworkImage(imageUrl: 'https://http.cat/401'),
+          ],
+        ),
+      );
+    }
+
+    if (adoptedCats.isEmpty && isLoggedIn) {
       return Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -54,18 +76,16 @@ class _CatsList extends StatelessWidget {
               'No cats adopted yet',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            CachedNetworkImage(
-              imageUrl: 'https://www.icegif.com/wp-content/uploads/2023/01/icegif-1606.gif',
-            ),
+            CachedNetworkImage(imageUrl: 'https://http.cat/404'),
           ],
         ),
       );
     }
 
     return ListView.builder(
-      itemCount: cats.length,
+      itemCount: adoptedCats.length,
       itemBuilder: (context, index) {
-        final cat = cats[index];
+        final cat = adoptedCats[index];
 
         return CatTile(
           cat: cat,

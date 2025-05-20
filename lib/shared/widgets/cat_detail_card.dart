@@ -200,6 +200,11 @@ class CatDetailCard extends ConsumerWidget {
                         ),
                       ),
                     ),
+                  SelectableText(
+                    'ID: ${cat.id}',
+                    style:
+                        Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.outline),
+                  ),
                 ],
               ),
             ),
