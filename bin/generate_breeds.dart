@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 void main() async {
-  final apiKey = 'live_Gu6LxEqbNsrwpxg7u3t7oPjslyTCazDZyktneefAF8Z34BKDvcZMUQzthhfLUPnO'; // Vlož svůj klíč
+  const apiKey = 'live_Gu6LxEqbNsrwpxg7u3t7oPjslyTCazDZyktneefAF8Z34BKDvcZMUQzthhfLUPnO'; // Vlož svůj klíč
   final breedsJson = File('assets/breeds.json').readAsStringSync();
   final breeds = json.decode(breedsJson) as List;
 
@@ -23,12 +23,12 @@ void main() async {
 
       print('✅ $breedId — url fetched');
 
-      breeds[index] = {...breed, 'reference_image_url': imageUrl};
+      breeds[index] = {...(breed as Map<String, dynamic>), 'reference_image_url': imageUrl};
     } else {
       print('❌ Failed to fetch $breedId: ${response.statusCode}');
     }
 
-    await Future.delayed(Duration(milliseconds: 200));
+    await Future.delayed(const Duration(milliseconds: 200));
   }
 
   final outFile = File('breeds-export.json');

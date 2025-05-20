@@ -1,10 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:mdevcamp_workshop/domain/domain.dart';
 import 'package:mdevcamp_workshop/repositories/cats_repository.dart';
 import 'package:netglade_utils/netglade_utils.dart';
-
-import '../domain/domain.dart';
 
 class CatsRepositoryMemory implements CatsRepository {
   bool _isLoaded = false;
@@ -23,14 +22,12 @@ class CatsRepositoryMemory implements CatsRepository {
     final cats = jsonDecode(catsJson) as List;
     final breeds = jsonDecode(breedsJson) as List;
 
-    _cats =
-        cats.map((cat) {
-          return Cat.fromJson(cat);
-        }).toList();
-    _breeds =
-        breeds.map((breed) {
-          return CatBreed.fromJson(breed);
-        }).toList();
+    _cats = cats.map((cat) {
+      return Cat.fromJson(cat as Map<String, dynamic>);
+    }).toList();
+    _breeds = breeds.map((breed) {
+      return CatBreed.fromJson(breed as Map<String, dynamic>);
+    }).toList();
 
     _isLoaded = true;
   }
@@ -48,6 +45,7 @@ class CatsRepositoryMemory implements CatsRepository {
       _cats[catIndex] = updatedCat;
 
       return Future.value(Result.success(updatedCat));
+      // ignore: avoid_catches_without_on_clauses, gonna catch em all
     } catch (e, s) {
       return Future.value(Result.error(RepositoryError(exception: e, stackTrace: s)));
     }
@@ -59,6 +57,7 @@ class CatsRepositoryMemory implements CatsRepository {
 
     try {
       return Result.success(_breeds);
+      // ignore: avoid_catches_without_on_clauses, gonna catch em all
     } catch (e, s) {
       return Result.error(RepositoryError(exception: e, stackTrace: s));
     }
@@ -77,6 +76,7 @@ class CatsRepositoryMemory implements CatsRepository {
 
     try {
       return Result.success(_cats.where((cat) => filter?.apply(cat: cat) ?? true).toList());
+      // ignore: avoid_catches_without_on_clauses, gonna catch em all
     } catch (e, s) {
       return Result.error(RepositoryError(exception: e, stackTrace: s));
     }

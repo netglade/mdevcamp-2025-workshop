@@ -12,8 +12,8 @@ class CatDetailCard extends ConsumerWidget {
   final VoidCallback? onRemoveFromBasket;
 
   const CatDetailCard({
-    super.key,
     required this.catId,
+    super.key,
     this.onAddToBasket,
     this.onRemoveFromBasket,
   });
@@ -31,7 +31,7 @@ class CatDetailCard extends ConsumerWidget {
     final isInBasket = basket.any((c) => c.id == cat.id);
 
     return Padding(
-      padding: EdgeInsets.only(bottom: 60),
+      padding: const EdgeInsets.only(bottom: 60),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,13 +58,13 @@ class CatDetailCard extends ConsumerWidget {
                   FavoriteFood(cat: cat),
                   AfraidOf(cat: cat),
                   FunFact(cat: cat),
-                  Divider(),
-                  Text('Origin story'),
+                  const Divider(),
+                  const Text('Origin story'),
                   Card(
                     color: Theme.of(context).colorScheme.surfaceContainerHighest,
                     margin: const EdgeInsets.symmetric(vertical: 8),
                     child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.all(16),
                       child: Stack(
                         children: [
                           Positioned(
@@ -80,7 +80,7 @@ class CatDetailCard extends ConsumerWidget {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 32, right: 32.0),
+                            padding: const EdgeInsets.only(left: 32, right: 32),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -127,7 +127,7 @@ class CatDetailCard extends ConsumerWidget {
                             children: [
                               WidgetSpan(
                                 child: Padding(
-                                  padding: const EdgeInsets.only(right: 8.0),
+                                  padding: const EdgeInsets.only(right: 8),
                                   child: FaIcon(
                                     FontAwesomeIcons.cartShopping,
                                     color: Theme.of(context).colorScheme.onError,
@@ -160,7 +160,7 @@ class CatDetailCard extends ConsumerWidget {
                             children: [
                               WidgetSpan(
                                 child: Padding(
-                                  padding: const EdgeInsets.only(right: 8.0),
+                                  padding: const EdgeInsets.only(right: 8),
                                   child: FaIcon(FontAwesomeIcons.cat, color: Theme.of(context).colorScheme.onPrimary),
                                 ),
                               ),

@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mdevcamp_workshop/domain/domain.dart';
 import 'package:mdevcamp_workshop/pages/home/tabs/breeds/widgets/breed_detail_card.dart';
 import 'package:mdevcamp_workshop/pages/home/tabs/breeds/widgets/breed_tile.dart';
-
-import '../../../../domain/domain.dart';
-import '../../../../providers/cat_breeds.dart';
+import 'package:mdevcamp_workshop/providers/cat_breeds.dart';
 
 class BreedsTab extends ConsumerWidget {
   const BreedsTab({super.key});
@@ -24,7 +23,9 @@ class BreedsTab extends ConsumerWidget {
                 Text(breeds.stackTrace.toString().substring(30)),
                 const SizedBox(height: 16),
                 ElevatedButton(
-                    onPressed: () => ref.read(catBreedsProvider.notifier).refresh(), child: const Text('Retry')),
+                  onPressed: () => ref.read(catBreedsProvider.notifier).refresh(),
+                  child: const Text('Retry'),
+                ),
               ],
             ),
           ),
@@ -38,7 +39,7 @@ class BreedsTab extends ConsumerWidget {
 class _CatBreedsList extends StatelessWidget {
   final List<CatBreed> breeds;
 
-  const _CatBreedsList({super.key, required this.breeds});
+  const _CatBreedsList({required this.breeds});
 
   @override
   Widget build(BuildContext context) {
@@ -49,9 +50,8 @@ class _CatBreedsList extends StatelessWidget {
 
         return BreedTile(
           breed: breed,
-          onTap: () {
-            showCupertinoModalPopup(context: context, builder: (context) => BreedDetailCard(breed: breed));
-          },
+          onTap: () =>
+              showCupertinoModalPopup<void>(context: context, builder: (context) => BreedDetailCard(breed: breed)),
         );
       },
     );

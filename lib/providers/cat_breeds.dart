@@ -18,11 +18,12 @@ class CatBreeds extends _$CatBreeds {
 
     if (breeds.isSuccess) return breeds.asSuccess;
 
+    // ignore: only_throw_errors, ok to throw - riverpod will handle it for us
     throw breeds.asError.exception;
   }
 
   Future<void> refresh() async {
-    state = AsyncLoading();
+    state = const AsyncLoading();
     final breeds = await _catsRepository.getBreeds();
 
     if (breeds.isError) {

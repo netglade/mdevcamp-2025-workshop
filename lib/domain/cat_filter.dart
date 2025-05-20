@@ -2,30 +2,15 @@ import 'package:equatable/equatable.dart';
 import 'package:mdevcamp_workshop/domain/cat.dart';
 
 class CatFilter extends Equatable {
-  final String? breedId;
-  final String? nameQuery;
-  final int? ageLimit;
-  final bool onlyAdopted;
+  final Set<String>? breeds;
 
-  const CatFilter({this.breedId, this.nameQuery, this.ageLimit, this.onlyAdopted = false});
+  const CatFilter({this.breeds});
 
   @override
-  List<Object?> get props => [breedId, nameQuery, ageLimit];
+  List<Object?> get props => [breeds];
 
   bool apply({required Cat cat}) {
-    if (onlyAdopted && !cat.isAdopted) {
-      return false;
-    }
-
-    if (breedId != null && cat.breedId != breedId) {
-      return false;
-    }
-
-    if (nameQuery != null && !cat.name.toLowerCase().contains(nameQuery!.toLowerCase())) {
-      return false;
-    }
-
-    if (ageLimit != null && cat.age > ageLimit!) {
+    if (breeds case final bredsValue? when !bredsValue.contains(cat.breedId) && bredsValue.isNotEmpty) {
       return false;
     }
 

@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class BreedOrigin extends StatelessWidget {
   final String origin;
 
-  const BreedOrigin({super.key, required this.origin});
+  const BreedOrigin({required this.origin, super.key});
 
   @override
   Widget build(BuildContext context) {

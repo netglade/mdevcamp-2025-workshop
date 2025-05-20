@@ -1,9 +1,8 @@
 import 'package:get_it/get_it.dart';
+import 'package:mdevcamp_workshop/domain/domain.dart';
 import 'package:mdevcamp_workshop/repositories/cats_repository.dart';
 import 'package:netglade_utils/netglade_utils.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import '../domain/domain.dart';
 
 part 'cats_list.g.dart';
 
@@ -21,11 +20,12 @@ class CatsList extends _$CatsList {
       return cats.asSuccess;
     }
 
+    // ignore: only_throw_errors, ok to throw - riverpod will handle it for us
     throw cats.asError.exception;
   }
 
-  Future<void> refresh() async {
-    state = AsyncLoading();
+  Future<void> refresh({CatFilter? filter}) async {
+    state = const AsyncLoading();
     final cats = await _catsRepository.getCats();
 
     if (cats.isError) {
@@ -36,7 +36,7 @@ class CatsList extends _$CatsList {
   }
 
   Future<void> adoptCat({required String catId, required String userId}) async {
-    state = AsyncLoading();
+    state = const AsyncLoading();
 
     final result = await _catsRepository.adoptCat(catId: catId, userId: userId);
 

@@ -6,45 +6,45 @@ import 'package:http/http.dart' as http;
 
 void main() async {
   final faker = Faker();
-  final apiKey = 'YOUR_API_KEY'; // Vlož svůj klíč
+  const apiKey = 'YOUR_API_KEY'; // Vlož svůj klíč
   final breedsJson = File('assets/breeds.json').readAsStringSync();
   final breeds = json.decode(breedsJson) as List;
 
-  final List<Map<String, dynamic>> cats = [];
+  final cats = <Map<String, dynamic>>[];
 
   final favoriteFoods = [
-    "tuna sushi",
-    "chicken liver pâté",
-    "salmon tartare",
-    "whipped cream on toast",
-    "grilled shrimp tails",
-    "melted cheese",
-    "catnip ice cream",
-    "anchovy pizza",
-    "crunchy mouse nuggets",
-    "bacon strips",
+    'tuna sushi',
+    'chicken liver pâté',
+    'salmon tartare',
+    'whipped cream on toast',
+    'grilled shrimp tails',
+    'melted cheese',
+    'catnip ice cream',
+    'anchovy pizza',
+    'crunchy mouse nuggets',
+    'bacon strips',
   ];
 
   final fears = [
-    "vacuum cleaner",
-    "cucumber",
-    "thunder",
-    "plastic bags",
-    "doorbell",
-    "fireworks",
-    "water spray",
-    "blender noise",
-    "strangers",
-    "robot vacuum",
-    "hair dryer",
-    "zucchini",
-    "the vet",
+    'vacuum cleaner',
+    'cucumber',
+    'thunder',
+    'plastic bags',
+    'doorbell',
+    'fireworks',
+    'water spray',
+    'blender noise',
+    'strangers',
+    'robot vacuum',
+    'hair dryer',
+    'zucchini',
+    'the vet',
   ];
 
   for (final breed in breeds) {
     final breedId = breed['id'];
     final lifeSpanStr = breed['life_span'] ?? '20';
-    final maxLife = _parseMaxLifeSpan(lifeSpanStr);
+    final maxLife = _parseMaxLifeSpan(lifeSpanStr as String);
 
     final url = Uri.parse('http://api.thecatapi.com/v1/images/search?breed_ids=$breedId&limit=10');
 
@@ -68,7 +68,7 @@ void main() async {
       print('❌ Failed to fetch $breedId: ${response.statusCode}');
     }
 
-    await Future.delayed(Duration(milliseconds: 200));
+    await Future.delayed<void>(const Duration(milliseconds: 200));
   }
 
   final outFile = File('cats.json');

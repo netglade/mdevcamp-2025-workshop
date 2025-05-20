@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import '../../domain/domain.dart';
+import 'package:mdevcamp_workshop/domain/domain.dart';
 
 class CatBreedInfo extends StatelessWidget {
-  const CatBreedInfo({super.key, required this.cat});
+  const CatBreedInfo({required this.cat, super.key});
 
   final Cat cat;
 
@@ -14,11 +13,11 @@ class CatBreedInfo extends StatelessWidget {
       text: TextSpan(
         style: Theme.of(context).textTheme.labelSmall,
         children: [
-          WidgetSpan(
+          const WidgetSpan(
             alignment: PlaceholderAlignment.middle,
-            child: Padding(padding: const EdgeInsets.only(right: 2.0), child: FaIcon(FontAwesomeIcons.paw, size: 16)),
+            child: Padding(padding: EdgeInsets.only(right: 2), child: FaIcon(FontAwesomeIcons.paw, size: 16)),
           ),
-          TextSpan(text: cat.breed.name, style: TextStyle(color: Colors.brown)),
+          TextSpan(text: cat.breed.name, style: const TextStyle(color: Colors.brown)),
         ],
       ),
     );

@@ -8,7 +8,7 @@ import 'package:mdevcamp_workshop/pages/home/home_page.dart';
 void main() {
   setupDi();
 
-  runApp(ProviderScope(child: const MyApp()));
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mdevcamp_workshop/domain/domain.dart';
 import 'package:mdevcamp_workshop/providers/basket.dart';
 import 'package:mdevcamp_workshop/shared/widgets/afraid_of.dart';
 import 'package:mdevcamp_workshop/shared/widgets/age.dart';
@@ -9,15 +10,13 @@ import 'package:mdevcamp_workshop/shared/widgets/cat_breed_info.dart';
 import 'package:mdevcamp_workshop/shared/widgets/favorite_food.dart';
 import 'package:mdevcamp_workshop/shared/widgets/price.dart';
 
-import '../../domain/domain.dart';
-
 class CatTile extends ConsumerWidget {
   final Cat cat;
   final VoidCallback? onTap;
   final VoidCallback? onAddToBasket;
   final VoidCallback? onRemoveFromBasket;
 
-  const CatTile({super.key, required this.cat, this.onTap, this.onAddToBasket, this.onRemoveFromBasket});
+  const CatTile({required this.cat, super.key, this.onTap, this.onAddToBasket, this.onRemoveFromBasket});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -29,7 +28,7 @@ class CatTile extends ConsumerWidget {
       onTap: onTap,
       child: Card(
         child: Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
+          padding: const EdgeInsets.only(bottom: 8),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -46,7 +45,7 @@ class CatTile extends ConsumerWidget {
                       width: 120,
                       height: 120,
                       fit: BoxFit.cover,
-                      placeholder: (context, url) => Center(child: FaIcon(FontAwesomeIcons.cat)),
+                      placeholder: (context, url) => const Center(child: FaIcon(FontAwesomeIcons.cat)),
                     ),
                   ),
                   if (isInBasket)
@@ -81,7 +80,6 @@ class CatTile extends ConsumerWidget {
                   children: [
                     Row(
                       spacing: 4,
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         // * Name and Breed
@@ -124,7 +122,7 @@ class CatTile extends ConsumerWidget {
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
+                      padding: const EdgeInsets.only(right: 8),
                       child: Column(
                         spacing: 4,
                         crossAxisAlignment: CrossAxisAlignment.start,

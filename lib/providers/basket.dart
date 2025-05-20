@@ -1,7 +1,6 @@
+import 'package:mdevcamp_workshop/domain/domain.dart';
 import 'package:mdevcamp_workshop/providers/cats_list.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
-import '../domain/domain.dart';
 
 part 'basket.g.dart';
 

@@ -8,7 +8,7 @@ import 'package:mdevcamp_workshop/pages/home/tabs/breeds/widgets/origin.dart';
 class BreedDetailCard extends StatelessWidget {
   final CatBreed breed;
 
-  const BreedDetailCard({super.key, required this.breed});
+  const BreedDetailCard({required this.breed, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class BreedDetailCard extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Temperament', style: const TextStyle(decoration: TextDecoration.underline)),
+                            const Text('Temperament', style: TextStyle(decoration: TextDecoration.underline)),
                             Text(breed.temperament, maxLines: 2, overflow: TextOverflow.ellipsis, softWrap: true),
                           ],
                         ),

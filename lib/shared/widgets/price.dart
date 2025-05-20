@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import '../../domain/domain.dart';
+import 'package:mdevcamp_workshop/domain/domain.dart';
 
 class Price extends StatelessWidget {
-  const Price({super.key, required this.cat});
+  const Price({required this.cat, super.key});
 
   final Cat cat;
 
@@ -14,11 +13,11 @@ class Price extends StatelessWidget {
       text: TextSpan(
         style: Theme.of(context).textTheme.bodyMedium,
         children: [
-          TextSpan(text: 'Price: '),
-          WidgetSpan(
+          const TextSpan(text: 'Price: '),
+          const WidgetSpan(
             alignment: PlaceholderAlignment.middle,
             child: Padding(
-              padding: const EdgeInsets.only(right: 2.0),
+              padding: EdgeInsets.only(right: 2),
               child: FaIcon(FontAwesomeIcons.dollarSign, size: 16),
             ),
           ),

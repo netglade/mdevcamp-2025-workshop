@@ -1,11 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mdevcamp_workshop/shared/widgets/cat_detail_card.dart';
+import 'package:mdevcamp_workshop/domain/domain.dart';
 import 'package:mdevcamp_workshop/providers/cats_adopted_list.dart';
 import 'package:mdevcamp_workshop/providers/cats_list.dart';
+import 'package:mdevcamp_workshop/shared/widgets/cat_detail_card.dart';
 import 'package:mdevcamp_workshop/shared/widgets/cat_tile.dart';
-
-import '../../../../domain/domain.dart';
 
 class AdoptedCatsTab extends ConsumerWidget {
   const AdoptedCatsTab({super.key});
@@ -25,7 +25,9 @@ class AdoptedCatsTab extends ConsumerWidget {
                 Text(catsList.stackTrace.toString().substring(30)),
                 const SizedBox(height: 16),
                 ElevatedButton(
-                    onPressed: () => ref.read(catsListProvider.notifier).refresh(), child: const Text('Retry')),
+                  onPressed: () => ref.read(catsListProvider.notifier).refresh(),
+                  child: const Text('Retry'),
+                ),
               ],
             ),
           ),
@@ -39,10 +41,28 @@ class AdoptedCatsTab extends ConsumerWidget {
 class _CatsList extends StatelessWidget {
   final List<Cat> cats;
 
-  const _CatsList({super.key, required this.cats});
+  const _CatsList({required this.cats});
 
   @override
   Widget build(BuildContext context) {
+    if (cats.isEmpty) {
+      return Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          spacing: 16,
+          children: [
+            Text(
+              'No cats adopted yet',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            CachedNetworkImage(
+              imageUrl: 'https://www.icegif.com/wp-content/uploads/2023/01/icegif-1606.gif',
+            ),
+          ],
+        ),
+      );
+    }
+
     return ListView.builder(
       itemCount: cats.length,
       itemBuilder: (context, index) {
@@ -51,7 +71,7 @@ class _CatsList extends StatelessWidget {
         return CatTile(
           cat: cat,
           onTap: () {
-            showModalBottomSheet(
+            showModalBottomSheet<void>(
               context: context,
               isScrollControlled: true,
               useSafeArea: true,

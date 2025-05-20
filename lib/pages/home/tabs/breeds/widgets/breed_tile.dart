@@ -9,7 +9,7 @@ class BreedTile extends StatelessWidget {
   final CatBreed breed;
   final VoidCallback? onTap;
 
-  const BreedTile({super.key, required this.breed, this.onTap});
+  const BreedTile({required this.breed, super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class BreedTile extends StatelessWidget {
                       width: 120,
                       height: 120,
                       fit: BoxFit.cover,
-                      placeholder: (context, url) => Center(child: FaIcon(FontAwesomeIcons.cat)),
+                      placeholder: (context, url) => const Center(child: FaIcon(FontAwesomeIcons.cat)),
                     ),
                   ),
                 const SizedBox(width: 12),
@@ -49,7 +49,7 @@ class BreedTile extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [BreedOrigin(origin: breed.origin), LifeSpan(lifeSpan: breed.lifeSpan)],
