@@ -36,14 +36,39 @@ class CatDetailCard extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16)),
-              child: CachedNetworkImage(
-                imageUrl: cat.imageUrl,
-                fit: BoxFit.fitWidth,
-                height: 250,
-                width: double.infinity,
-              ),
+            Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(16), topRight: Radius.circular(16)),
+                  child: CachedNetworkImage(
+                    imageUrl: cat.imageUrl,
+                    fit: BoxFit.fitWidth,
+                    height: 250,
+                    width: double.infinity,
+                  ),
+                ),
+                Positioned(
+                  right: 0,
+                  child: GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: ClipRRect(
+                      borderRadius:
+                          const BorderRadius.only(bottomLeft: Radius.circular(16), topRight: Radius.circular(16)),
+                      child: Container(
+                        width: 48,
+                        height: 48,
+                        color: Theme.of(context).colorScheme.primary.withAlpha(150),
+                        child: Center(
+                          child: FaIcon(
+                            FontAwesomeIcons.xmark,
+                            color: Theme.of(context).colorScheme.onPrimary.withAlpha(160),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
