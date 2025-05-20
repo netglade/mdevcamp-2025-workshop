@@ -24,7 +24,6 @@ class Basket extends _$Basket {
     for (final cat in state) {
       adoptedNotifier.adoptCat(
         catId: cat.id,
-        userId: 'userId', // TODO(firebase): Replace with actual user ID
       );
     }
 
