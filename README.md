@@ -9,3 +9,9 @@ Welcome to the Cat Adoption App! This is a simple Flutter application that allow
 - Android Studio or Visual Studio Code
 - Android Emulator or physical device for testing
 - iOS Simulator or physical device for testing (optional)
+
+# Firebase Setup
+
+- Install the Firebase CLI
+- Intall FlutterFire CLI (`dart pub global activate flutterfire_cli`)
+- Run import script `flutter run -t bin/firestore_import.dart`

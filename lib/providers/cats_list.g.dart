@@ -6,7 +6,7 @@ part of 'cats_list.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$catsListHash() => r'3a5b7d1285fd39c5f762f6c172e6c94b465d3498';
+String _$catsListHash() => r'893996de71be57c6189435c723ec1edd229dd15c';
 
 /// See also [CatsList].
 @ProviderFor(CatsList)

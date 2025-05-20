@@ -33,7 +33,7 @@ Map<String, dynamic> _$CatToJson(Cat instance) => <String, dynamic>{
       'price_usd': instance.price,
       'origin_story': instance.originStory,
       'fun_fact': instance.funFact,
-      'breed': instance.breed,
+      'breed': instance.breed.toJson(),
       'is_adopted': instance.isAdopted,
       'adoptedBy': instance.adoptedBy,
     };
