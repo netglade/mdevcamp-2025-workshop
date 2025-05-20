@@ -10,7 +10,7 @@ class CatFilter extends Equatable {
   List<Object?> get props => [breeds];
 
   bool apply({required Cat cat}) {
-    if (breeds case final bredsValue? when !bredsValue.contains(cat.breedId) && bredsValue.isNotEmpty) {
+    if (breeds case final breedsValue? when !breedsValue.contains(cat.breedId) && breedsValue.isNotEmpty) {
       return false;
     }
 
