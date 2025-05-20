@@ -10,18 +10,21 @@ part 'cats_list.g.dart';
 class CatsList extends _$CatsList {
   final CatsRepository _catsRepository;
 
-  CatsList({CatsRepository? catsRepository}) : _catsRepository = catsRepository ?? GetIt.I<CatsRepository>();
+  CatsList({CatsRepository? catsRepository})
+      : _catsRepository = catsRepository ?? GetIt.I<CatsRepository>();
 
   @override
-  Future<List<Cat>> build() async {
-    final cats = await _catsRepository.getCats();
+  Stream<List<Cat>> build() async* {
+    final catsStream = _catsRepository.getCatsStream();
 
-    if (cats.isSuccess) {
-      return cats.asSuccess;
+    await for (final cats in catsStream) {
+      if (cats.isSuccess) {
+        yield cats.asSuccess;
+      } else {
+        // ignore: only_throw_errors, ok to throw - riverpod will handle it for us
+        throw cats.asError.exception;
+      }
     }
-
-    // ignore: only_throw_errors, ok to throw - riverpod will handle it for us
-    throw cats.asError.exception;
   }
 
   Future<void> refresh({CatFilter? filter}) async {
@@ -29,7 +32,8 @@ class CatsList extends _$CatsList {
     final cats = await _catsRepository.getCats();
 
     if (cats.isError) {
-      state = AsyncError(cats.asError.exception, cats.asError.stackTrace ?? StackTrace.current);
+      state = AsyncError(cats.asError.exception,
+          cats.asError.stackTrace ?? StackTrace.current,);
     } else {
       state = AsyncData(cats.asSuccess);
     }
@@ -41,7 +45,8 @@ class CatsList extends _$CatsList {
     final result = await _catsRepository.adoptCat(catId: catId, userId: userId);
 
     if (result.isError) {
-      state = AsyncError(result.asError.exception, result.asError.stackTrace ?? StackTrace.current);
+      state = AsyncError(result.asError.exception,
+          result.asError.stackTrace ?? StackTrace.current,);
     }
 
     final cats = state.value ?? [];

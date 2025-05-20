@@ -6,12 +6,12 @@ part of 'cat_breeds.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$catBreedsHash() => r'd025ac5b23d98a8c02966a4385827a3450778238';
+String _$catBreedsHash() => r'2b755660ea48c7f2a69f694e0ab7ea9b70b10836';
 
 /// See also [CatBreeds].
 @ProviderFor(CatBreeds)
 final catBreedsProvider =
-    AsyncNotifierProvider<CatBreeds, List<CatBreed>>.internal(
+    StreamNotifierProvider<CatBreeds, List<CatBreed>>.internal(
   CatBreeds.new,
   name: r'catBreedsProvider',
   debugGetCreateSourceHash:
@@ -20,6 +20,6 @@ final catBreedsProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$CatBreeds = AsyncNotifier<List<CatBreed>>;
+typedef _$CatBreeds = StreamNotifier<List<CatBreed>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -13,13 +13,17 @@ class CatBreeds extends _$CatBreeds {
   CatBreeds({CatsRepository? catsRepository}) : _catsRepository = catsRepository ?? GetIt.I<CatsRepository>();
 
   @override
-  Future<List<CatBreed>> build() async {
-    final breeds = await _catsRepository.getBreeds();
+  Stream<List<CatBreed>> build() async* {
+    final breedsStream = _catsRepository.getBreedsStream();
 
-    if (breeds.isSuccess) return breeds.asSuccess;
-
-    // ignore: only_throw_errors, ok to throw - riverpod will handle it for us
-    throw breeds.asError.exception;
+    await for (final breeds in breedsStream) {
+      if (breeds.isSuccess) {
+        yield breeds.asSuccess;
+      } else {
+        // ignore: only_throw_errors, ok to throw - riverpod will handle it for us
+        throw breeds.asError.exception;
+      }
+    }
   }
 
   Future<void> refresh() async {
