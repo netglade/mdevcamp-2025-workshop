@@ -30,6 +30,9 @@ class _BasketList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // final user = FirebaseAuth.instance.currentUser;
+    // final isLoggedIn = user != null;
+
     if (cats.isEmpty) {
       return Center(
         child: Column(
@@ -71,7 +74,26 @@ class _BasketList extends ConsumerWidget {
             );
           },
         ),
-        if (cats.isNotEmpty)
+        // if (!isLoggedIn)
+        // SliverToBoxAdapter(
+        //   child: Center(
+        //     child: Container(
+        //       height: 150,
+        //       decoration: BoxDecoration(
+        //         color: Theme.of(context).colorScheme.primary.withAlpha(50),
+        //         borderRadius: BorderRadius.circular(16),
+        //       ),
+        //       margin: const EdgeInsets.only(top: 16),
+        //       child: Center(
+        //         child: Text(
+        //           'You need to be logged in to adopt cats',
+        //           style: Theme.of(context).textTheme.bodyLarge,
+        //         ),
+        //       ),
+        //     ),
+        //   ),
+        // ),
+        if (cats.isNotEmpty /* && isLoggedIn */)
           SliverFillRemaining(
             hasScrollBody: false,
             child: Container(

@@ -20,6 +20,17 @@ class CatBreeds extends _$CatBreeds {
 
     // ignore: only_throw_errors, ok to throw - riverpod will handle it for us
     throw breeds.asError.exception;
+
+    // final breedsStream = _catsRepository.getBreedsStream();
+    // 
+    // await for (final breeds in breedsStream) {
+    //   if (breeds.isSuccess) {
+    //     yield breeds.asSuccess;
+    //   } else {
+    //     // ignore: only_throw_errors, ok to throw - riverpod will handle it for us
+    //     throw breeds.asError.exception;
+    //   }
+    // }
   }
 
   Future<void> refresh() async {
