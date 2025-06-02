@@ -9,12 +9,17 @@ environment:
 
 dependencies:
   cached_network_image: ^3.4.1
+  # cloud_firestore: ^5.6.5
   equatable: ^2.0.7
   faker: ^2.2.0
   flutter:
     sdk: flutter
   flutter_riverpod: ^2.6.1
   font_awesome_flutter: ^10.8.0
+  # firebase_auth: ^5.5.4
+  # firebase_core: ^3.12.1
+  # firebase_remote_config: ^5.4.2
+  # firebase_ui_auth: ^1.16.1
   get_it: ^8.0.3
   http: ^1.4.0
   json_annotation: ^4.9.0
